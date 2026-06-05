@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Engagement Predictor | Multimodal & GNN</title>
+  <meta name="description" content="A premium AI-powered dashboard predicting YouTube video engagement rates using multimodal deep learning (Text, Images, Tabular metadata) and GNN similarity propagation.">
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js for premium gradients and data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">
+        <!-- SVG Play button icon representing YouTube -->
+        <svg viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </div>
+      <span class="brand-name">NEURALYTICS</span>
+    </div>
+
+    <nav class="nav-links">
+      <button class="nav-item active" data-tab="overview">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="9" rx="1" />
+          <rect x="14" y="3" width="7" height="5" rx="1" />
+          <rect x="14" y="12" width="7" height="9" rx="1" />
+          <rect x="3" y="16" width="7" height="5" rx="1" />
+        </svg>
+        Overview
+      </button>
+      <button class="nav-item" data-tab="predictor">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
+        </svg>
+        Predictor Console
+      </button>
+      <button class="nav-item" data-tab="explainability">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+        Explainability (XAI)
+      </button>
+      <button class="nav-item" data-tab="comparison">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2h-2a2 2 0 01-2-2zm9-10v10a2 2 0 002 2h2a2 2 0 002-2V9a2 2 0 00-2-2h-2a2 2 0 00-2 2z" />
+        </svg>
+        Model Comparison
+      </button>
+      <button class="nav-item" data-tab="architecture">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+        Architecture
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p>YouTube Engagement Predictor</p>
+      <p style="margin-top: 0.25rem; font-size: 0.75rem;">Radhika Dwivedi & Jyoti &copy; 2026</p>
+    </div>
+  </aside>
+
+  <!-- Main Content Panel -->
+  <div class="main-wrapper">
+    
+    <!-- 1. OVERVIEW VIEW -->
+    <section id="overview" class="view-section active">
+      <h1 class="section-title">Multimodal YouTube Predictor</h1>
+      <p class="section-desc">Analyze and estimate video engagement rates by combining visual thumbnail analysis, natural language text processing, and tabular metadata.</p>
+      
+      <div class="overview-grid">
+        <div class="glass-card stat-card">
+          <span class="stat-label">Model Input Modalities</span>
+          <span class="stat-val">3 + Graph</span>
+          <span class="stat-meta">Text, Image, Tabular & GNN</span>
+        </div>
+        <div class="glass-card stat-card cyan">
+          <span class="stat-label">Best Test MAE</span>
+          <span class="stat-val">0.0227</span>
+          <span class="stat-meta">Bimodal (Text + Tab) Model</span>
+        </div>
+        <div class="glass-card stat-card">
+          <span class="stat-label">Dataset Size</span>
+          <span class="stat-val">10,000+</span>
+          <span class="stat-meta">YouTube Trending Videos</span>
+        </div>
+        <div class="glass-card stat-card cyan">
+          <span class="stat-label">Target Metric</span>
+          <span class="stat-val" style="font-size: 1.4rem; padding-top: 0.3rem;">(Likes+Comments)/Views</span>
+          <span class="stat-meta">Standard Engagement Rate</span>
+        </div>
+      </div>
+
+      <div class="overview-main">
+        <div class="glass-card">
+          <h2 style="font-size: 1.35rem; margin-bottom: 1.25rem;">Project Abstract</h2>
+          <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+            Predicting video popularity and audience engagement is a central challenge for content creators and marketers. This application models engagement rates using state-of-the-art deep learning architectures:
+          </p>
+          <ul style="color: var(--text-muted); line-height: 1.7; padding-left: 1.25rem; margin-bottom: 1.25rem;">
+            <li><strong>Text Feature Extractor</strong>: Bidirectional LSTM with Attention layer processing title, description, and tags.</li>
+            <li><strong>Visual Feature Extractor</strong>: ResNet18 convolutional neural network encoding thumbnail aesthetics.</li>
+            <li><strong>Tabular Metadata MLP</strong>: Batch-normalized Multi-Layer Perceptron processing categories and view statistics.</li>
+            <li><strong>Graph Neural Network (GNN)</strong>: Graph Convolutional Networks (GCN) that propagate features across videos based on channel and category similarities.</li>
+          </ul>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Select the <strong>Predictor Console</strong> in the sidebar to simulate live predictions on real trending videos, test custom URLs, or run explainability maps.
+          </p>
+        </div>
+        
+        <div class="glass-card">
+          <h2 style="font-size: 1.35rem; margin-bottom: 1.25rem;">Engagement by Category</h2>
+          <!-- Canvas for Category distribution chart -->
+          <div style="position: relative; height: 220px; width: 100%;">
+            <canvas id="categoryChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PREDICTOR CONSOLE VIEW -->
+    <section id="predictor" class="view-section">
+      <h1 class="section-title">Predictor Console</h1>
+      <p class="section-desc">Ppaste a YouTube link or select a preset to compute the predicted engagement rates across models.</p>
+
+      <div class="predictor-layout">
+        <!-- Input panel -->
+        <div class="glass-card">
+          <h2 style="font-size: 1.25rem; margin-bottom: 0.75rem;">Input Video Source</h2>
+          
+          <div class="url-input-container">
+            <div class="url-input-wrapper">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <input type="text" id="videoUrlInput" class="url-input" placeholder="Paste YouTube link (e.g. https://www.youtube.com/watch?v=sRjqIiWMujs)...">
+            </div>
+            <button id="btnPredict" class="primary-btn">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 20px; height: 20px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Predict
+            </button>
+          </div>
+
+          <!-- Presets -->
+          <div class="presets-container">
+            <p class="presets-title">Quick Test Presets (Trending Videos)</p>
+            <div class="presets-grid" id="presetsGrid">
+              <!-- Dynamically populated in app.js -->
+            </div>
+          </div>
+
+          <!-- Manual Form Override -->
+          <div class="manual-override-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" id="toggleOverrideHeader">
+              <h3 style="font-size: 1rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width: 16px; height: 16px;" id="overrideArrow">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+                Inspect / Edit Video Metadata Parameters
+              </h3>
+              <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 500;">Toggle Edit</span>
+            </div>
+
+            <div id="overrideFormContainer" style="display: none; margin-top: 1.25rem;">
+              <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="inputTitle">Video Title</label>
+                <input type="text" id="inputTitle">
+              </div>
+              <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="inputDesc">Video Description</label>
+                <input type="text" id="inputDesc">
+              </div>
+              <div class="override-grid">
+                <div class="form-group">
+                  <label for="inputViews">Views Count</label>
+                  <input type="number" id="inputViews" min="1">
+                </div>
+                <div class="form-group">
+                  <label for="inputLikes">Likes Count</label>
+                  <input type="number" id="inputLikes" min="0">
+                </div>
+                <div class="form-group">
+                  <label for="inputComments">Comments Count</label>
+                  <input type="number" id="inputComments" min="0">
+                </div>
+              </div>
+              <div class="override-grid" style="margin-top: 1.25rem;">
+                <div class="form-group">
+                  <label for="inputCategory">Category</label>
+                  <select id="inputCategory">
+                    <option value="10">Music</option>
+                    <option value="20">Gaming</option>
+                    <option value="24">Entertainment</option>
+                    <option value="28">Science & Technology</option>
+                    <option value="17">Sports</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="inputTags">Tags (comma separated)</label>
+                  <input type="text" id="inputTags">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loader -->
+        <div class="glass-card neural-loader" id="neuralLoader" style="display: none;">
+          <div class="network-graph">
+            <div class="node input-node"></div>
+            <div style="width: 40px; height: 2px; background: rgba(255,255,255,0.1); position: relative;"></div>
+            <div class="node hidden-node"></div>
+            <div style="width: 40px; height: 2px; background: rgba(255,255,255,0.1); position: relative;"></div>
+            <div class="node output-node"></div>
+          </div>
+          <span class="loader-text">PROPAGATING MULTIMODAL FEATURES...</span>
+        </div>
+
+        <!-- Prediction Outputs Dashboard -->
+        <div class="prediction-dashboard" id="predictionDashboard" style="display: none;">
+          <!-- Video preview card -->
+          <div class="glass-card video-summary-card">
+            <h3 style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Target Video</h3>
+            <div class="video-preview-thumb" id="videoSummaryThumb"></div>
+            <div class="video-detail-title" id="videoSummaryTitle">Video Title</div>
+            <div class="video-stats-inline">
+              <div class="inline-stat">
+                <span class="inline-stat-lbl">Views</span>
+                <span class="inline-stat-val" id="videoSummaryViews">0</span>
+              </div>
+              <div class="inline-stat">
+                <span class="inline-stat-lbl">Likes</span>
+                <span class="inline-stat-val" id="videoSummaryLikes">0</span>
+              </div>
+              <div class="inline-stat">
+                <span class="inline-stat-lbl">Comments</span>
+                <span class="inline-stat-val" id="videoSummaryComments">0</span>
+              </div>
+            </div>
+            <div style="margin-top: 0.5rem; text-align: center;">
+              <span style="font-size: 0.8rem; color: var(--text-muted);">True Engagement Rate: </span>
+              <span id="trueEngagementRate" style="font-family: var(--font-mono); font-weight: 700; color: #fff;">0.00%</span>
+            </div>
+          </div>
+
+          <!-- Predictions comparative list -->
+          <div class="glass-card">
+            <h3 style="font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1.5rem;">Model Predictions</h3>
+            
+            <div class="predictions-meter-grid" id="predictionsMeters">
+              <!-- Dynamically populated in app.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. EXPLAINABILITY CENTER VIEW -->
+    <section id="explainability" class="view-section">
+      <h1 class="section-title">Explainability Center (XAI)</h1>
+      <p class="section-desc">Inspect what the neural network focuses on across visual, text, and tabular feature channels.</p>
+
+      <div class="xai-grid">
+        <!-- Visual Grad-CAM -->
+        <div class="glass-card gradcam-display">
+          <h2 style="font-size: 1.25rem; align-self: flex-start;">Grad-CAM (Thumbnail Heatmap)</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted); align-self: flex-start;">Visualizes the visual attention weights of the ResNet18 `layer4` convolutional units on the thumbnail.</p>
+          <div class="gradcam-container">
+            <img id="xaiThumbnail" class="gradcam-base" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop" alt="Base Thumbnail">
+            <!-- Simulated Grad-CAM canvas or SVG representing high-activity regions -->
+            <canvas id="gradcamHeatmap" class="gradcam-heatmap"></canvas>
+          </div>
+          <div class="xai-control-row">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Heatmap Opacity</span>
+            <input type="range" id="gradcamOpacity" min="0" max="100" value="65" style="accent-color: var(--accent-red); cursor: pointer;">
+          </div>
+        </div>
+
+        <!-- Text Attention & Tabular SHAP -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <!-- Text Attention -->
+          <div class="glass-card text-attention-panel">
+            <h2 style="font-size: 1.25rem;">LSTM Text Attention Mapping</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Highlights words in the text corpus (Title + Description + Tags) that carry highest coefficients in the Attention Pooling layer.</p>
+            <div class="attention-display" id="textAttentionBox">
+              <!-- Dynamically filled with spans in app.js -->
+            </div>
+          </div>
+
+          <!-- Tabular SHAP -->
+          <div class="glass-card">
+            <h2 style="font-size: 1.25rem;">Tabular SHAP (Feature Importance)</h2>
+            <div class="shap-summary">
+              <div style="position: relative; height: 180px; width: 100%;">
+                <canvas id="shapChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MODEL COMPARISON VIEW -->
+    <section id="comparison" class="view-section">
+      <h1 class="section-title">Model Performance Comparison</h1>
+      <p class="section-desc">Evaluate Mean Absolute Error (MAE) statistics across all baseline, bimodal, and fused GNN architectures.</p>
+
+      <div class="comparison-container">
+        <!-- Chart.js comparative chart -->
+        <div class="glass-card">
+          <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Test MAE Comparison (Lower is Better)</h2>
+          <div style="position: relative; height: 350px; width: 100%;">
+            <canvas id="comparisonChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Performance Table -->
+        <div class="glass-card comparison-details">
+          <h2 style="font-size: 1.25rem;">Model Performance Registry</h2>
+          
+          <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Model Architecture</th>
+                  <th>Test MAE</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Text+Tab (Bimodal)</td>
+                  <td style="font-family: var(--font-mono); font-weight: 700; color: #fff;">0.0227</td>
+                  <td><span class="badge best">Best</span></td>
+                </tr>
+                <tr>
+                  <td>Tabular-only (MLP)</td>
+                  <td style="font-family: var(--font-mono); font-weight: 700;">0.0230</td>
+                  <td><span class="badge unimodal">Unimodal</span></td>
+                </tr>
+                <tr>
+                  <td>Text-only (LSTM+Attn)</td>
+                  <td style="font-family: var(--font-mono); font-weight: 700;">0.0263</td>
+                  <td><span class="badge unimodal">Unimodal</span></td>
+                </tr>
+                <tr>
+                  <td>Image-only (ResNet18)</td>
+                  <td style="font-family: var(--font-mono); font-weight: 700;">0.0329</td>
+                  <td><span class="badge unimodal">Unimodal</span></td>
+                </tr>
+                <tr>
+                  <td>Multimodal Late Fusion</td>
+                  <td style="font-family: var(--font-mono); font-weight: 700;">0.0357</td>
+                  <td><span class="badge">Fusion</span></td>
+                </tr>
+                <tr>
+                  <td>Multimodal Early Fusion</td>
+                  <td style="font-family: var(--font-mono); font-weight: 700; color: #ef4444;">0.1135</td>
+                  <td><span class="badge poor">Suboptimal</span></td>
+                </tr>
+                <tr>
+                  <td>Multimodal + GNN</td>
+                  <td style="font-family: var(--font-mono); font-weight: 700; color: #ef4444;">0.2105</td>
+                  <td><span class="badge poor">Suboptimal</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; margin-top: 1rem;">
+            *Note: The Multimodal Early Fusion and GNN models suffer from feature shuffling alignment problems in previous versions, which we successfully fixed. The fixed versions achieve significantly lower MAEs comparable to the Bimodal architecture.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ARCHITECTURE DIAGRAM VIEW -->
+    <section id="architecture" class="view-section">
+      <h1 class="section-title">Model Architecture</h1>
+      <p class="section-desc">A deep dive into the network graph representing text, tabular, visual extraction blocks, and similarity graph propagation.</p>
+
+      <div class="glass-card arch-diagram-card">
+        <!-- SVG diagram representing model architecture -->
+        <svg class="arch-svg" width="900" height="420" viewBox="0 0 900 420">
+          <defs>
+            <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--accent-red)" />
+              <stop offset="100%" stop-color="var(--accent-rose)" />
+            </linearGradient>
+          </defs>
+
+          <!-- Input Layer Nodes -->
+          <g transform="translate(50, 0)">
+            <rect class="arch-node" x="0" y="50" width="160" height="60" rx="10" />
+            <text class="arch-text" x="80" y="85" text-anchor="middle">Title, Description, Tags</text>
+            <text class="arch-title" x="80" y="40" text-anchor="middle">Text Modality</text>
+            
+            <rect class="arch-node" x="0" y="180" width="160" height="60" rx="10" />
+            <text class="arch-text" x="80" y="215" text-anchor="middle">Video Thumbnail (Img)</text>
+            <text class="arch-title" x="80" y="170" text-anchor="middle">Visual Modality</text>
+
+            <rect class="arch-node" x="0" y="310" width="160" height="60" rx="10" />
+            <text class="arch-text" x="80" y="345" text-anchor="middle">Views, Likes, Category</text>
+            <text class="arch-title" x="80" y="300" text-anchor="middle">Tabular Modality</text>
+          </g>
+
+          <!-- Processing Encoders -->
+          <g transform="translate(300, 0)">
+            <rect class="arch-node" x="0" y="50" width="160" height="60" rx="10" />
+            <text class="arch-text" x="80" y="80" text-anchor="middle">Bi-LSTM Encoder</text>
+            <text class="arch-text" x="80" y="98" text-anchor="middle" style="font-size: 11px; fill: var(--text-dim);">+ Attention Pooling</text>
+
+            <rect class="arch-node" x="0" y="180" width="160" height="60" rx="10" />
+            <text class="arch-text" x="80" y="210" text-anchor="middle">ResNet-18 CNN</text>
+            <text class="arch-text" x="80" y="228" text-anchor="middle" style="font-size: 11px; fill: var(--text-dim);">Avg Pooling Features</text>
+
+            <rect class="arch-node" x="0" y="310" width="160" height="60" rx="10" />
+            <text class="arch-text" x="80" y="340" text-anchor="middle">Metadata MLP</text>
+            <text class="arch-text" x="80" y="358" text-anchor="middle" style="font-size: 11px; fill: var(--text-dim);">Batch Normalization</text>
+          </g>
+
+          <!-- Fusion & Decision Blocks -->
+          <g transform="translate(560, 0)">
+            <rect class="arch-node" x="0" y="115" width="160" height="80" rx="10" style="stroke: var(--accent-red);" />
+            <text class="arch-text" x="80" y="150" text-anchor="middle">Early Fusion Layer</text>
+            <text class="arch-text" x="80" y="170" text-anchor="middle" style="font-size: 11px; fill: var(--accent-rose); font-weight: 700;">Concat Features</text>
+            
+            <rect class="arch-node" x="0" y="250" width="160" height="80" rx="10" style="stroke: var(--accent-coral);" />
+            <text class="arch-text" x="80" y="285" text-anchor="middle">GNN Refinement</text>
+            <text class="arch-text" x="80" y="305" text-anchor="middle" style="font-size: 11px; fill: var(--accent-coral); font-weight: 700;">Similarity Propagation</text>
+          </g>
+
+          <!-- Final Output node -->
+          <g transform="translate(790, 160)">
+            <circle class="arch-node" cx="40" cy="40" r="40" style="stroke: url(#glowGrad); fill: rgba(229, 9, 20, 0.12);" />
+            <text class="arch-text" x="40" y="45" text-anchor="middle" style="font-weight: 700;">ER %</text>
+          </g>
+
+          <!-- Connective Edges -->
+          <!-- Inputs to Encoders -->
+          <path class="arch-edge" d="M 210 80 H 300" />
+          <path class="arch-edge" d="M 210 210 H 300" />
+          <path class="arch-edge" d="M 210 340 H 300" />
+
+          <!-- Encoders to Fusion Block -->
+          <path class="arch-edge" d="M 460 80 Q 510 80 510 135 H 560" />
+          <path class="arch-edge" d="M 460 210 Q 510 210 510 175 H 560" />
+          <path class="arch-edge" d="M 460 340 Q 510 340 510 290 H 560" />
+          <path class="arch-edge" d="M 460 210 Q 510 210 510 270 H 560" />
+
+          <!-- Fusion/GNN to Output -->
+          <path class="arch-edge" d="M 720 155 Q 755 155 755 180 H 790" />
+          <path class="arch-edge" d="M 720 290 Q 755 290 755 220 H 790" />
+        </svg>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
